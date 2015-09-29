@@ -1,0 +1,30 @@
+{
+  "name": "react-tabs",
+  "version": "0.0.1",
+  "description": "Attempt to create tabs with react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XYZ-123/react-tabs.git"
+  },
+  "keywords": [
+    "react",
+    "tabs"
+  ],
+  "author": "Rudyuk Arthur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XYZ-123/react-tabs/issues"
+  },
+  "homepage": "https://github.com/XYZ-123/react-tabs#readme",
+  "devDependencies": {
+    "babel-core": "^5.8.25",
+    "gulp-babel": "^5.2.1"
+  },
+  "dependencies": {
+    "gulp-less": "^3.0.3"
+  }
+}
