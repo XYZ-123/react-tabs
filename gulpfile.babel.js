@@ -26,10 +26,10 @@ gulp.task('styles', () => {
 function lint(files, options) {
   return () => {
     return gulp.src(files)
+      .pipe($.babel())
       .pipe(reload({stream: true, once: true}))
-      .pipe($.eslint(options))
-      .pipe($.eslint.format())
-      .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
+      .pipe($.concat('all.js'))
+      .pipe($.if(!browserSync.active, $.eslint.failAfterError())).pipe(gulp.dest('dist/scripts'));
   };
 }
 const testLintOptions = {
@@ -38,7 +38,7 @@ const testLintOptions = {
   }
 };
 
-gulp.task('lint', lint('app/scripts/**/*.js'));
+gulp.task('lint', lint('app/scripts/**/*.jsx'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('html', ['styles'], () => {
@@ -94,7 +94,7 @@ gulp.task('serve', ['styles', 'fonts'], () => {
     notify: false,
     port: 9000,
     server: {
-      baseDir: ['.tmp', 'app'],
+      baseDir: ['.tmp', 'dist'],
       routes: {
         '/bower_components': 'bower_components'
       }
