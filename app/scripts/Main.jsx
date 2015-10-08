@@ -1,10 +1,12 @@
-import React from 'react';
-import * as TabHolder from 'tab-holder';
+import {TabHolder} from './tab-holder';
+
 class App extends React.Component {
   render()
   {
-    return (<div className="main">Example with tabs <TabHolder/></div>);
+    console.log("I fired");
+    console.log(TabHolder);
+    return (<div><TabHolder /><div className="main">Example with tabs</div></div>);
   }
 }
 
-React.render(<App/>, document.body);
+React.render(<App />, document.getElementById("container"));

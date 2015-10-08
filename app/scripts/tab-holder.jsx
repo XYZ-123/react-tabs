@@ -1,9 +1,8 @@
-import React from 'react';
-
-export default class TabHolder extends React.Component
+export class TabHolder extends React.Component
 {
   render()
   {
-    return (<div className="tabs"></div>);
+    console.log("me too");
+    return (<div className="tabs">Hey I am tab holder</div>);
   }
 }
