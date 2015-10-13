@@ -70,7 +70,9 @@ gulp.task('fonts', () => {
     .pipe(gulp.dest('dist/fonts'));
 });
 gulp.task('vendor',()=>{
-  return gulp.src(['node_modules/react/dist/react.js']).pipe(gulp.dest('dist/scripts/vendor'));
+  return gulp.src(['node_modules/react/dist/react.js',
+                  'node_modules/react-dom/dist/react-dom.js'])
+                .pipe(gulp.dest('dist/scripts/vendor'));
 });
 gulp.task('extras', () => {
   return gulp.src([

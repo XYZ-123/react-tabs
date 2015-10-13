@@ -12,81 +12,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _tabHeader = require("./tab-header");
+var Tab = (function (_React$Component) {
+  _inherits(Tab, _React$Component);
 
-var _tab = require("./tab");
+  function Tab() {
+    _classCallCheck(this, Tab);
 
-var TabHolder = (function (_React$Component) {
-  _inherits(TabHolder, _React$Component);
-
-  function TabHolder(props) {
-    _classCallCheck(this, TabHolder);
-
-    _get(Object.getPrototypeOf(TabHolder.prototype), "constructor", this).call(this, props);
-    var tabs = [{ Id: 1, Active: true, Header: "Header of first tab", Content: "Hello from first tab" }]; //window.localStorage.getItem("tabs");
-    this.state = { "tabs": tabs };
+    _get(Object.getPrototypeOf(Tab.prototype), "constructor", this).apply(this, arguments);
   }
 
-  _createClass(TabHolder, [{
-    key: "handleHeaderClick",
-    value: function handleHeaderClick(id) {
-      console.log("Clicked tab with id " + id);
-    }
-  }, {
+  _createClass(Tab, [{
     key: "render",
     value: function render() {
-      var _this = this;
-
       console.log("I fired");
-      var contentNode;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = this.state.tabs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var tab = _step.value;
-
-          if (tab.Active) {
-            contentNode = React.createElement(_tab.Tab, { Content: tab.Content });
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"]) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      var tabHeaders = this.state.tabs.map(function (tab) {
-        return React.createElement(_tabHeader.TabHeader, { key: tab.Id, handleHeaderClick: _this.handleHeaderClick.bind(_this), Id: tab.Id, Header: tab.Header, Active: tab.Active });
-      });
       return React.createElement(
         "div",
-        { className: "tab-holder" },
-        React.createElement(
-          "div",
-          { className: "tab-headers" },
-          tabHeaders
-        ),
-        React.createElement(
-          "div",
-          { className: "tab-content" },
-          contentNode
-        )
+        { className: "tab" },
+        this.props.Content
       );
     }
   }]);
 
-  return TabHolder;
+  return Tab;
 })(React.Component);
 
-exports.TabHolder = TabHolder;
+exports.Tab = Tab;

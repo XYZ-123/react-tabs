@@ -23,7 +23,6 @@ var App = (function (_React$Component) {
     key: "render",
     value: function render() {
       console.log("I fired");
-      console.log(_tabHolder.TabHolder);
       return React.createElement(
         "div",
         null,
@@ -40,4 +39,4 @@ var App = (function (_React$Component) {
   return App;
 })(React.Component);
 
-React.render(React.createElement(App, null), document.getElementById("container"));
+ReactDOM.render(React.createElement(App, null), document.getElementById("container"));

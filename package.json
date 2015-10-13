@@ -15,6 +15,7 @@
     "gulp-eslint": "^0.13.2",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
+    "gulp-less": "^3.0.3",
     "gulp-load-plugins": "^0.10.0",
     "gulp-minify-css": "^1.1.1",
     "gulp-minify-html": "^1.0.0",
@@ -26,7 +27,8 @@
     "gulp-useref": "^1.1.1",
     "main-bower-files": "^2.5.0",
     "opn": "^1.0.1",
-    "react": "^0.13.0-rc2",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "require": "^2.4.20",
     "wiredep": "^2.2.2"
   },
