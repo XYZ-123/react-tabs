@@ -31,6 +31,11 @@ var TabHolder = (function (_React$Component) {
     key: "handleHeaderClick",
     value: function handleHeaderClick(id) {
       console.log("Clicked tab with id " + id);
+      var updatedList = this.state.tabs.map(function (value) {
+        value.Active = value.Id == id;
+        return value;
+      });
+      this.setState({ "tabs": updatedList });
     }
   }, {
     key: "handleHeaderDelete",
@@ -49,13 +54,15 @@ var TabHolder = (function (_React$Component) {
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = this.state.tabs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = this.state.tabs.toArray()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var tab = _step.value;
 
           if (tab.Active) {
             contentNode = React.createElement(_tab.Tab, { Content: tab.Content });
+            break;
           }
         }
+        //debugger;
       } catch (err) {
         _didIteratorError = true;
         _iteratorError = err;

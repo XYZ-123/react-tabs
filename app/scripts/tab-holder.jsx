@@ -12,6 +12,11 @@ export class TabHolder extends React.Component {
   handleHeaderClick(id)
   {
     console.log(`Clicked tab with id ${id}`);
+    var updatedList = this.state.tabs.map((value)=>{
+        value.Active = (value.Id == id);
+      return value;
+    });
+    this.setState({"tabs":updatedList});
   }
   handleHeaderDelete(id)
   {
@@ -21,13 +26,15 @@ export class TabHolder extends React.Component {
   {
     console.log("I fired");
     var contentNode;
-    for(let tab of this.state.tabs)
+    for(let tab of this.state.tabs.toArray())
     {
       if(tab.Active)
       {
         contentNode = <Tab Content={tab.Content}/>;
+        break;
       }
     }
+    //debugger;
     var tabHeaders = this.state.tabs.map((tab, index)=>{return <TabHeader key={index}
                                                                           handleHeaderClick={this.handleHeaderClick.bind(this)}
                                                                           handleDeleteClick={this.handleHeaderDelete.bind(this)}
