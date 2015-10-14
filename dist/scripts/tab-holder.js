@@ -23,7 +23,7 @@ var TabHolder = (function (_React$Component) {
     _classCallCheck(this, TabHolder);
 
     _get(Object.getPrototypeOf(TabHolder.prototype), "constructor", this).call(this, props);
-    var tabs = [{ Id: 1, Active: true, Header: "Header of first tab", Content: "Hello from first tab" }]; //window.localStorage.getItem("tabs");
+    var tabs = Immutable.List.of({ Id: 1, Active: true, Header: "Header of first tab", Content: "Hello from first tab" }, { Id: 2, Active: false, Header: "Header of second tab", Content: "Hello from second tab" }); //window.localStorage.getItem("tabs");
     this.state = { "tabs": tabs };
   }
 
@@ -31,6 +31,11 @@ var TabHolder = (function (_React$Component) {
     key: "handleHeaderClick",
     value: function handleHeaderClick(id) {
       console.log("Clicked tab with id " + id);
+    }
+  }, {
+    key: "handleHeaderDelete",
+    value: function handleHeaderDelete(id) {
+      console.log("Delete tab with id " + id);
     }
   }, {
     key: "render",
@@ -66,8 +71,13 @@ var TabHolder = (function (_React$Component) {
         }
       }
 
-      var tabHeaders = this.state.tabs.map(function (tab) {
-        return React.createElement(_tabHeader.TabHeader, { key: tab.Id, handleHeaderClick: _this.handleHeaderClick.bind(_this), Id: tab.Id, Header: tab.Header, Active: tab.Active });
+      var tabHeaders = this.state.tabs.map(function (tab, index) {
+        return React.createElement(_tabHeader.TabHeader, { key: index,
+          handleHeaderClick: _this.handleHeaderClick.bind(_this),
+          handleDeleteClick: _this.handleHeaderDelete.bind(_this),
+          Id: tab.Id,
+          Header: tab.Header,
+          Active: tab.Active });
       });
       return React.createElement(
         "div",
@@ -81,6 +91,15 @@ var TabHolder = (function (_React$Component) {
           "div",
           { className: "tab-content" },
           contentNode
+        ),
+        React.createElement(
+          "div",
+          { className: "tab-tools" },
+          React.createElement(
+            "span",
+            { className: "tab-tools__add" },
+            "+"
+          )
         )
       );
     }

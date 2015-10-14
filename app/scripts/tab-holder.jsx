@@ -5,12 +5,17 @@ export class TabHolder extends React.Component {
   constructor(props)
   {
     super(props);
-    let tabs = [{Id:1, Active:true, Header:"Header of first tab",Content:"Hello from first tab"}];//window.localStorage.getItem("tabs");
+    let tabs = Immutable.List.of({Id:1, Active:true, Header:"Header of first tab",Content:"Hello from first tab"},
+      {Id:2, Active:false, Header:"Header of second tab",Content:"Hello from second tab"});//window.localStorage.getItem("tabs");
     this.state = {"tabs": tabs};
   }
   handleHeaderClick(id)
   {
     console.log(`Clicked tab with id ${id}`);
+  }
+  handleHeaderDelete(id)
+  {
+    console.log(`Delete tab with id ${id}`);
   }
   render()
   {
@@ -23,10 +28,18 @@ export class TabHolder extends React.Component {
         contentNode = <Tab Content={tab.Content}/>;
       }
     }
-    var tabHeaders = this.state.tabs.map((tab)=>{return <TabHeader key={tab.Id} handleHeaderClick={this.handleHeaderClick.bind(this)} Id={tab.Id} Header={tab.Header} Active={tab.Active}/>});
+    var tabHeaders = this.state.tabs.map((tab, index)=>{return <TabHeader key={index}
+                                                                          handleHeaderClick={this.handleHeaderClick.bind(this)}
+                                                                          handleDeleteClick={this.handleHeaderDelete.bind(this)}
+                                                                          Id={tab.Id}
+                                                                          Header={tab.Header}
+                                                                          Active={tab.Active}/>});
     return (<div className="tab-holder">
                 <div className="tab-headers">{tabHeaders}</div>
                 <div className="tab-content">{contentNode}</div>
+                <div className="tab-tools">
+                    <span className="tab-tools__add">+</span>
+                </div>
             </div>);
   }
 }

@@ -9,7 +9,7 @@ const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 gulp.task('styles', () => {
-  return gulp.src('app/styles/*.scss')
+  /*return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass.sync({
@@ -20,7 +20,7 @@ gulp.task('styles', () => {
     .pipe($.autoprefixer({browsers: ['last 1 version']}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
-    .pipe(reload({stream: true}));
+    .pipe(reload({stream: true}));*/
 });
 
 function lint(files, options) {
@@ -71,7 +71,9 @@ gulp.task('fonts', () => {
 });
 gulp.task('vendor',()=>{
   return gulp.src(['node_modules/react/dist/react.js',
-                  'node_modules/react-dom/dist/react-dom.js'])
+                  'node_modules/react-dom/dist/react-dom.js',
+                  'node_modules/immutable/dist/immutable.js'])
+                .pipe($.concat('vendor.js'))
                 .pipe(gulp.dest('dist/scripts/vendor'));
 });
 gulp.task('extras', () => {

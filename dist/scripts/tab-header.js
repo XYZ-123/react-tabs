@@ -27,6 +27,11 @@ var TabHeader = (function (_React$Component) {
       this.props.handleHeaderClick(this.props.Id);
     }
   }, {
+    key: "handleDeleteClick",
+    value: function handleDeleteClick() {
+      this.props.handleDeleteClick(this.props.Id);
+    }
+  }, {
     key: "render",
     value: function render() {
       console.log("I fired");
@@ -35,7 +40,12 @@ var TabHeader = (function (_React$Component) {
       return React.createElement(
         "div",
         { className: classNames, onClick: this.handleClick.bind(this) },
-        this.props.Header
+        this.props.Header,
+        React.createElement(
+          "span",
+          { onClick: this.handleDeleteClick.bind(this), className: "tab-header__remove" },
+          "X"
+        )
       );
     }
   }]);
