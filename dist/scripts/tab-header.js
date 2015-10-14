@@ -34,13 +34,15 @@ var TabHeader = (function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log("I fired");
       var classNames = "tab-header " + (this.props.Active ? "active" : "");
-      console.log(classNames);
       return React.createElement(
         "div",
-        { className: classNames, onClick: this.handleClick.bind(this) },
-        this.props.Header,
+        { className: classNames },
+        React.createElement(
+          "span",
+          { onClick: this.handleClick.bind(this) },
+          this.props.Header
+        ),
         React.createElement(
           "span",
           { onClick: this.handleDeleteClick.bind(this), className: "tab-header__remove" },
