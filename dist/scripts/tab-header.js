@@ -24,12 +24,12 @@ var TabHeader = (function (_React$Component) {
   _createClass(TabHeader, [{
     key: "handleClick",
     value: function handleClick() {
-      this.props.handleHeaderClick(this.props.Id);
+      this.props.onHeaderClick(this.props.Id);
     }
   }, {
     key: "handleDeleteClick",
     value: function handleDeleteClick() {
-      this.props.handleDeleteClick(this.props.Id);
+      this.props.onDeleteClick(this.props.Id);
     }
   }, {
     key: "render",

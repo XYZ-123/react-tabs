@@ -16,6 +16,10 @@ var _tabHeader = require("./tab-header");
 
 var _tab = require("./tab");
 
+var _tabAddForm = require("./tab-add-form");
+
+var _Identity = require("./Identity");
+
 var TabHolder = (function (_React$Component) {
   _inherits(TabHolder, _React$Component);
 
@@ -24,29 +28,41 @@ var TabHolder = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(TabHolder.prototype), "constructor", this).call(this, props);
     var tabs = Immutable.List.of({ Id: 1, Active: true, Header: "Header of first tab", Content: "Hello from first tab" }, { Id: 2, Active: false, Header: "Header of second tab", Content: "Hello from second tab" }); //window.localStorage.getItem("tabs");
-    this.state = { "tabs": tabs };
+    this.state = { tabs: tabs, showAddForm: false };
   }
 
   _createClass(TabHolder, [{
-    key: "handleHeaderClick",
-    value: function handleHeaderClick(id) {
+    key: "onHeaderClick",
+    value: function onHeaderClick(id) {
       console.log("Clicked tab with id " + id);
 
       var updatedList = this.state.tabs.map(function (value) {
         value.Active = value.Id == id;
         return value;
       });
-      this.setState({ "tabs": updatedList });
+      this.setState({ tabs: updatedList });
     }
   }, {
-    key: "handleHeaderDelete",
-    value: function handleHeaderDelete(id) {
+    key: "onHeaderDelete",
+    value: function onHeaderDelete(id) {
       console.log("Delete tab with id " + id);
 
       var updatedList = this.state.tabs.filter(function (value) {
         return value.Id != id;
       });
       this.setState({ "tabs": updatedList });
+    }
+  }, {
+    key: "onTabAdd",
+    value: function onTabAdd(header, content) {
+      var tabToAdd = { Header: header, Content: content, Active: true, Id: _Identity.Identity.next() };
+      var updatedList = this.state.tabs.push(tabToAdd);
+      this.setState({ tabs: updatedList });
+    }
+  }, {
+    key: "toggleAddForm",
+    value: function toggleAddForm() {
+      this.setState({ showAddForm: !this.state.showAddForm });
     }
   }, {
     key: "render",
@@ -68,7 +84,6 @@ var TabHolder = (function (_React$Component) {
             break;
           }
         }
-        //debugger;
       } catch (err) {
         _didIteratorError = true;
         _iteratorError = err;
@@ -84,10 +99,11 @@ var TabHolder = (function (_React$Component) {
         }
       }
 
+      var tabAddForm = React.createElement(_tabAddForm.TabAddForm, { onTabAdd: this.onTabAdd.bind(this) });
       var tabHeaders = this.state.tabs.map(function (tab, index) {
         return React.createElement(_tabHeader.TabHeader, { key: index,
-          handleHeaderClick: _this.handleHeaderClick.bind(_this),
-          handleDeleteClick: _this.handleHeaderDelete.bind(_this),
+          onHeaderClick: _this.onHeaderClick.bind(_this),
+          onDeleteClick: _this.onHeaderDelete.bind(_this),
           Id: tab.Id,
           Header: tab.Header,
           Active: tab.Active });
@@ -110,8 +126,13 @@ var TabHolder = (function (_React$Component) {
           { className: "tab-tools" },
           React.createElement(
             "span",
-            { className: "tab-tools__add" },
+            { onClick: this.toggleAddForm.bind(this), className: "tab-tools__add" },
             "+"
+          ),
+          React.createElement(
+            "div",
+            null,
+            this.state.showAddForm ? tabAddForm : null
           )
         )
       );

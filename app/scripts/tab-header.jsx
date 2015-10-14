@@ -2,11 +2,11 @@ export class TabHeader extends React.Component
 {
   handleClick()
   {
-    this.props.handleHeaderClick(this.props.Id);
+    this.props.onHeaderClick(this.props.Id);
   }
   handleDeleteClick()
   {
-    this.props.handleDeleteClick(this.props.Id);
+    this.props.onDeleteClick(this.props.Id);
   }
   render()
   {
