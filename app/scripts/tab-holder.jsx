@@ -7,8 +7,8 @@ export class TabHolder extends React.Component {
   constructor(props)
   {
     super(props);
-    let tabs = Immutable.List.of({Id:1, Active:true, Header:"Header of first tab",Content:"Hello from first tab"},
-      {Id:2, Active:false, Header:"Header of second tab",Content:"Hello from second tab"});//window.localStorage.getItem("tabs");
+    let tabs = Immutable.List.of({Id:1,Importance:1, Active:true, Header:"Header of first tab",Content:"Hello from first tab"},
+      {Id:2,Importance:2, Active:false, Header:"Header of second tab",Content:"Hello from second tab"});//window.localStorage.getItem("tabs");
     this.state = {tabs: tabs, showAddForm:false};
   }
   onHeaderClick(id)  {
@@ -26,7 +26,8 @@ export class TabHolder extends React.Component {
     var updatedList = this.state.tabs.filter((value)=>{return value.Id != id});
     this.setState({"tabs":updatedList});
   }
-  onTabAdd(header, content)  {
+  onTabAdd(header, content, importance)  {
+    console.log(`Added tab with header ${header} and content ${content}`);
     var tabToAdd = {Header:header,Content:content,Active:true,Id:Identity.next()};
     var updatedList = this.state.tabs.push(tabToAdd);
     this.setState({tabs:updatedList});
@@ -51,15 +52,16 @@ export class TabHolder extends React.Component {
                                                                           onHeaderClick={this.onHeaderClick.bind(this)}
                                                                           onDeleteClick={this.onHeaderDelete.bind(this)}
                                                                           Id={tab.Id}
+                                                                          Importance={tab.Importance}
                                                                           Header={tab.Header}
                                                                           Active={tab.Active}/>});
     return (<div className="tab-holder">
                 <div className="tab-headers">{tabHeaders}</div>
-                <div className="tab-content">{contentNode}</div>
                 <div className="tab-tools">
-                    <span onClick={this.toggleAddForm.bind(this)} className="tab-tools__add">+</span>
+                    <span onClick={this.toggleAddForm.bind(this)} className="tab-tools__add">{this.state.showAddForm ? "-":"+"}</span>
                   <div>{this.state.showAddForm ? tabAddForm: null}</div>
                 </div>
+                <div className="tab-content">{contentNode}</div>
 
             </div>);
   }
